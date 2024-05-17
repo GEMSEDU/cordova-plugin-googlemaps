@@ -1,0 +1,56 @@
+android {
+    // #1. Find (project)/config.xml file
+    def configXmlFile = file("src/main/res/xml/config.xml")
+
+    if (configXmlFile == null) {
+        throw new GradleException("Can not find config.xml file.")
+    }
+
+    // parse xml file
+    def widget = new XmlParser().parse(configXmlFile)
+    if (widget.preference == null) {
+        throw new GradleException("widget is null.")
+    }
+    if (widget.preference.size() == 0) {
+        throw new GradleException("Please add '<preference name=\"GOOGLE_MAPS_ANDROID_API_KEY\" />' to the config.xml file.")
+    }
+    Properties props = new Properties()
+    def isKeyFound = 0
+
+    widget.preference.each { pref ->
+        def name = pref.attributes().name
+        def value = pref.attributes().value
+        println("name = " + name);
+        if (name == "GOOGLE_MAPS_ANDROID_API_KEY") {
+            isKeyFound = 1
+            props.setProperty(name, value)
+        }
+    }
+
+    if (isKeyFound == 0) {
+        throw new GradleException("Please add '<preference name=\"GOOGLE_MAPS_ANDROID_API_KEY\" />' to the config.xml file.")
+    }
+
+    //-----------------------------------------------
+    // AndroidX dependencies
+    //-----------------------------------------------
+    dependencies {
+        implementation 'com.google.android.gms:play-services-maps:18.0.2'
+        implementation 'com.google.android.gms:play-services-location:19.0.1'
+    }
+
+    defaultConfig {
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        debug {
+            manifestPlaceholders.GOOGLE_MAPS_ANDROID_API_KEY = props.getProperty("GOOGLE_MAPS_ANDROID_API_KEY")
+        }
+        release {
+            manifestPlaceholders.GOOGLE_MAPS_ANDROID_API_KEY = props.getProperty("GOOGLE_MAPS_ANDROID_API_KEY")
+        }
+    }
+}
+
+ 
