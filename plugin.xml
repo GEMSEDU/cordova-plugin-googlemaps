@@ -437,6 +437,7 @@
     <header-file src="src/ios/GoogleMaps/IPluginProtocol.h"/>
 
     <!-- Adicionando a dependência -->
+    <preference name="GOOGLE_MAPS_IOS_API_KEY" default="" />
     <preference name="deployment-target" value="14.0" />
     <preference name="SwiftVersion" value="5" />
     <dependency id="cordova-plugin-add-swift-support@2.0.2"/>
