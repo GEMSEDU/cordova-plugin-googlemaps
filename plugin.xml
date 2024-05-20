@@ -136,8 +136,7 @@
     <engine name="apple-ios" version=">=11.0.0" />
   </engines>
   
-	<preference name="GOOGLE_MAPS_IOS_API_KEY" default="" />
-  <preference name="GOOGLE_MAPS_ANDROID_API_KEY" default=""/>
+	
   <!-- android -->
   <platform name="android">
     <info>
@@ -153,7 +152,7 @@
 
     <config-file target="config.xml" parent="/*">
 	
-
+  <preference name="GOOGLE_MAPS_ANDROID_API_KEY" default=""/>
       <!-- for Crosswalk -->
       <preference name="xwalkZOrderOnTop" value="true"/>
       <preference name="BackgroundColor" value="0"/>
@@ -326,6 +325,8 @@
     </info>
 
     <config-file target="config.xml" parent="/*">
+	    	<preference name="GOOGLE_MAPS_IOS_API_KEY" default="" />
+
       <feature name="CordovaGoogleMaps">
         <param name="ios-package" value="CordovaGoogleMaps"/>
         <param name="onload" value="true"/>
