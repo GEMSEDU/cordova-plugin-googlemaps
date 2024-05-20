@@ -152,7 +152,7 @@
 
     <config-file target="config.xml" parent="/*">
 	
-  <preference name="GOOGLE_MAPS_ANDROID_API_KEY" default=""/>
+ 	 <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value=""/>
       <!-- for Crosswalk -->
       <preference name="xwalkZOrderOnTop" value="true"/>
       <preference name="BackgroundColor" value="0"/>
